@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="leagueList-menu">
+    <ul>
+      <li *ngFor="let item of leagueList">
+        <a [routerLink]="['/', item.label]" [class.active]="selectedMenuItemId === item.id"
+          (click)="setActiveMenuItem(item.id)">
+          {{ item.value }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

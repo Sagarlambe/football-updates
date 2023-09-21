@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="card-container">
+      <div  class="match-card" *ngFor="let fixture of resultData">
+        <div class="home-team"><img src={{fixture.teams.home.logo}} alt ="countryflag" width="30" height="30"></div>
+        <div class="home-team">{{fixture.teams.home.name}}</div>
+        <div class="result-block">
+          <div class="row">
+            <span class="col-sm-4">{{fixture.score.fulltime.home }}</span><span class="col-sm-4"> - </span><span class="col-sm-4">{{fixture.score.fulltime.away}}</span>
+          </div>  
+        </div>
+        <div class="away-team">{{fixture.teams.away.name}}</div>
+        <div class="away-team"><img src={{fixture.teams.away.logo}} alt ="countryflag" width="30" height="30" ></div>
+      </div>
+    </div>
+    <div class="button-left">
+      <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
+      </div>
+    </div>
+    
+    
+    
+    
