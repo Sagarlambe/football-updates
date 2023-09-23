@@ -11,10 +11,10 @@ import { NavigationService } from '../shared/navigation.service';
 export class NavbarComponent implements OnInit {
   leagueList: leaguesMenu[] = [];
   selectedMenuItemId: number = 39;
-  constructor(private navigationService: NavigationService, private footballService: FootBallService) { }
-  ngOnInit() {
+  constructor(private navigationService: NavigationService, private footballService: FootBallService) {
     this.getCountriesList();
   }
+  ngOnInit() {}
 
   getCountriesList() {
     this.leagueList = this.footballService.getCountryList();
