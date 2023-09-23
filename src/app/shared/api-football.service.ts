@@ -23,14 +23,8 @@ export class FootBallService {
     this.idlTeamChanged$ = new EventEmitter();
   }
 
-  setIdleagueChanged(idleague: number) {
-    this.idleague = idleague;
-    this.idleagueChanged$.emit(idleague);
-  }
-
-  setIdTeamsChanged(teamId: number) {
-    this.idTeams = teamId;
-    this.idlTeamChanged$.emit(teamId)
+ getCountryList(): leaguesMenu[] {
+    return leagueList;
   }
 
   getFootballData(): Observable<StandingObject> {
@@ -40,15 +34,21 @@ export class FootBallService {
     return this.http.get<StandingObject>(`${this.apiUrl}standings?league=${this.idleague}&season=${this.currentYear}`, { headers });
   }
 
-  getCountryList(): leaguesMenu[] {
-    return leagueList;
-  }
-
     getGamesResult(): Observable<FixtureObject> {
     const headers = new HttpHeaders({
       'x-rapidapi-key': this.apiKey
     });
     return this.http.get<FixtureObject>(`${this.apiUrl}fixtures?league=${this.idleague}&season=${this.currentYear}&team=${this.idTeams}&last=${this.lastgames}`, { headers });
+  }
+
+    setIdleagueChanged(idleague: number) {
+    this.idleague = idleague;
+    this.idleagueChanged$.emit(idleague);
+  }
+
+  setIdTeamsChanged(teamId: number) {
+    this.idTeams = teamId;
+    this.idlTeamChanged$.emit(teamId)
   }
 
 }
