@@ -5,17 +5,15 @@ import { leagueList } from '../mock-leagues';
 import { FixtureObject, StandingObject,  leaguesMenu } from '../model/football.model';
 @Injectable({ providedIn: 'root' })
 export class FootBallService {
+  private apiKey = '6440392d5e93461c956f2cebb78a0767'; 
+  private apiUrl = 'https://v3.football.api-sports.io/';
   lastgames: number = 10;
   private idTeams: number = 40;
   currentYear: Date | number;
   private idleague: number;
   public idlTeamChanged$: EventEmitter<number>;
   public idleagueChanged$: EventEmitter<number>;
-  headers = new HttpHeaders({
-    'x-rapidapi-host': 'v3.football.api-sports.io',
-    'x-rapidapi-key': '6440392d5e93461c956f2cebb78a0767'
-  });
-
+  
   constructor(private http: HttpClient) {
     this.currentYear = (new Date()).getFullYear();
     this.idleague = 39;
@@ -36,15 +34,21 @@ export class FootBallService {
   }
 
   getFootballData(): Observable<StandingObject> {
-    return this.http.get<StandingObject>(`https://v3.football.api-sports.io/standings?league=${this.idleague}&season=${this.currentYear}`, { headers: this.headers });
+    const headers = new HttpHeaders({
+      'x-rapidapi-key': this.apiKey
+    });
+    return this.http.get<StandingObject>(`${this.apiUrl}standings?league=${this.idleague}&season=${this.currentYear}`, { headers });
   }
 
   getCountryList(): leaguesMenu[] {
     return leagueList;
   }
 
-  getGamesResult(): Observable<FixtureObject> {
-    return this.http.get<FixtureObject>(`https://v3.football.api-sports.io/fixtures?league=${this.idleague}&season=${this.currentYear}&team=${this.idTeams}&last=${this.lastgames}`, { headers: this.headers });
+    getGamesResult(): Observable<FixtureObject> {
+    const headers = new HttpHeaders({
+      'x-rapidapi-key': this.apiKey
+    });
+    return this.http.get<FixtureObject>(`${this.apiUrl}fixtures?league=${this.idleague}&season=${this.currentYear}&team=${this.idTeams}&last=${this.lastgames}`, { headers });
   }
 
 }
